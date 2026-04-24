@@ -1,0 +1,28 @@
+{% extends "shop/base.html" %}
+{% block title %}{{ product.name }} | Artisan Bottle{% endblock %}
+{% block content %}
+    <div style="display: flex; gap: 4rem; align-items: flex-start;">
+        <div style="flex: 1; border: 1px solid var(--border-color); padding: 1rem; background: var(--secondary-bg);">
+            <img src="{% if product.image %}{{ product.image.url }}{% else %}https://via.placeholder.com/600x800?text=Premium+Bottle{% endif %}" alt="{{ product.name }}" style="width: 100%; height: auto; display: block;">
+        </div>
+        <div style="flex: 1.2;">
+            <p style="color: var(--accent-color); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 0.5rem;">
+                <a href="{{ product.category.get_absolute_url }}" style="color: inherit; text-decoration: none;">{{ product.category.name }}</a>
+            </p>
+            <h1 style="font-size: 3rem; margin-top: 0; line-height: 1.1;">{{ product.name }}</h1>
+            
+            <div style="height: 2px; width: 60px; background: var(--accent-color); margin: 2rem 0;"></div>
+            
+            <p class="product-price" style="font-size: 2.5rem; font-family: 'Playfair Display', serif;">${{ product.price }}</p>
+            
+            <div style="margin: 2.5rem 0; color: var(--text-muted); font-size: 1.1rem; line-height: 1.8;">
+                {{ product.description|linebreaks }}
+            </div>
+            
+            <div style="margin-top: 3rem; display: flex; gap: 1.5rem;">
+                <a href="{% url 'shop:cart_add' product.id %}" class="btn btn-success" style="padding: 1.2rem 3rem; font-size: 1rem;">Add to Collection</a>
+                <a href="{% url 'shop:product_list' %}" class="btn" style="padding: 1.2rem 2rem;">Back to Shop</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

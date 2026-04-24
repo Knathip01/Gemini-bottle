@@ -1,0 +1,52 @@
+{% extends "shop/base.html" %}
+{% block title %}Checkout | Artisan Bottle{% endblock %}
+{% block content %}
+    <div style="max-width: 800px; margin: 0 auto;">
+        <h1 style="text-align: center; margin-bottom: 3rem; letter-spacing: 2px;">SECURE CHECKOUT</h1>
+        
+        <div style="background: var(--secondary-bg); border: 1px solid var(--border-color); padding: 3rem;">
+            <form method="post" class="checkout-form">
+                {% csrf_token %}
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div>
+                        <label style="color: var(--accent-color); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; display: block; margin-bottom: 0.5rem;">First Name</label>
+                        <input type="text" name="first_name" required placeholder="John">
+                    </div>
+                    <div>
+                        <label style="color: var(--accent-color); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; display: block; margin-bottom: 0.5rem;">Last Name</label>
+                        <input type="text" name="last_name" required placeholder="Doe">
+                    </div>
+                </div>
+                
+                <div style="margin-top: 1.5rem;">
+                    <label style="color: var(--accent-color); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; display: block; margin-bottom: 0.5rem;">Email Address</label>
+                    <input type="email" name="email" required placeholder="john.doe@example.com">
+                </div>
+                
+                <div style="margin-top: 1.5rem;">
+                    <label style="color: var(--accent-color); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; display: block; margin-bottom: 0.5rem;">Shipping Address</label>
+                    <input type="text" name="address" required placeholder="123 Luxury Avenue">
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem;">
+                    <div>
+                        <label style="color: var(--accent-color); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; display: block; margin-bottom: 0.5rem;">City</label>
+                        <input type="text" name="city" required placeholder="Bangkok">
+                    </div>
+                    <div>
+                        <label style="color: var(--accent-color); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; display: block; margin-bottom: 0.5rem;">Postal Code</label>
+                        <input type="text" name="postal_code" required placeholder="10110">
+                    </div>
+                </div>
+                
+                <div style="margin-top: 3rem;">
+                    <button type="submit" class="btn btn-success" style="width: 100%; padding: 1.2rem; font-size: 1rem;">Complete Purchase</button>
+                </div>
+            </form>
+        </div>
+        
+        <p style="text-align: center; margin-top: 2rem; color: var(--text-muted); font-size: 0.85rem;">
+            Your personal data will be used to process your order and for other purposes described in our privacy policy.
+        </p>
+    </div>
+{% endblock %}

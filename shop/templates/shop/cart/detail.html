@@ -1,0 +1,47 @@
+{% extends "shop/base.html" %}
+{% block title %}Your Collection | Artisan Bottle{% endblock %}
+{% block content %}
+    <h1 style="text-align: center; margin-bottom: 3rem; letter-spacing: 2px;">YOUR SELECTION</h1>
+    
+    {% if cart_items %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Spirits</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                    <tr>
+                        <td style="font-family: 'Playfair Display', serif; font-size: 1.2rem;">{{ item.product.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td style="color: var(--text-muted);">${{ item.price }}</td>
+                        <td style="color: var(--accent-color); font-weight: 600;">${{ item.total_price }}</td>
+                        <td>
+                            <a href="{% url 'shop:cart_remove' item.product.id %}" style="color: #c0392b; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Remove</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <div class="cart-summary">
+            <span style="font-size: 1rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px;">Grand Total</span><br>
+            ${{ total_price }}
+        </div>
+        
+        <div style="margin-top: 3rem; display: flex; justify-content: space-between; align-items: center;">
+            <a href="{% url 'shop:product_list' %}" class="btn" style="border: none; text-decoration: underline;">&larr; Back to Collections</a>
+            <a href="{% url 'shop:checkout' %}" class="btn btn-success" style="padding: 1.2rem 4rem;">Proceed to Checkout</a>
+        </div>
+    {% else %}
+        <div style="text-align: center; padding: 5rem 0; border: 1px dashed var(--border-color);">
+            <p style="font-size: 1.2rem; color: var(--text-muted);">Your selection is currently empty.</p>
+            <a href="{% url 'shop:product_list' %}" class="btn" style="margin-top: 1rem;">Browse Our Spirits</a>
+        </div>
+    {% endif %}
+{% endblock %}

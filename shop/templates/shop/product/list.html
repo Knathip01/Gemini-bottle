@@ -1,0 +1,39 @@
+{% extends "shop/base.html" %}
+{% block title %}Collections | Artisan Bottle{% endblock %}
+{% block content %}
+    <div style="text-align: center; padding: 4rem 0; margin-bottom: 3rem; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=1920'); background-size: cover; background-position: center; border: 1px solid var(--border-color);">
+        <h1 style="font-size: 3.5rem; margin-bottom: 1rem; letter-spacing: 2px;">FINE SPIRITS</h1>
+        <p style="color: var(--accent-color); text-transform: uppercase; letter-spacing: 3px; font-weight: 300;">Handpicked for the Connoisseur</p>
+    </div>
+
+    <div class="sidebar">
+        <h3>Categories</h3>
+        <ul>
+            <li {% if not category %}style="border-left: 2px solid var(--accent-color); padding-left: 10px;"{% endif %}>
+                <a href="{% url 'shop:product_list' %}" {% if not category %}style="color: var(--accent-color)"{% endif %}>All Collections</a>
+            </li>
+            {% for c in categories %}
+                <li {% if category.slug == c.slug %}style="border-left: 2px solid var(--accent-color); padding-left: 10px;"{% endif %}>
+                    <a href="{{ c.get_absolute_url }}" {% if category.slug == c.slug %}style="color: var(--accent-color)"{% endif %}>{{ c.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="content">
+        <h2 style="margin-top: 0; font-size: 2rem;">{% if category %}{{ category.name }}{% else %}All Products{% endif %}</h2>
+        <div class="product-grid">
+            {% for product in products %}
+                <div class="product-item">
+                    <a href="{{ product.get_absolute_url }}">
+                        <img src="{% if product.image %}{{ product.image.url }}{% else %}https://via.placeholder.com/400x500?text=Premium+Bottle{% endif %}" alt="{{ product.name }}">
+                    </a>
+                    <div class="product-info">
+                        <h3><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
+                        <p class="product-price">${{ product.price }}</p>
+                        <a href="{% url 'shop:cart_add' product.id %}" class="btn">Add to Cart</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

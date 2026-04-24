@@ -1,0 +1,17 @@
+{% extends "shop/base.html" %}
+{% block title %}Order Confirmed | Artisan Bottle{% endblock %}
+{% block content %}
+    <div style="text-align: center; margin-top: 8rem; padding: 4rem; border: 1px solid var(--border-color); background: var(--secondary-bg);">
+        <div style="font-size: 4rem; color: var(--accent-color); margin-bottom: 2rem;">&#10003;</div>
+        <h1 style="font-size: 3rem; margin-bottom: 1rem; letter-spacing: 2px;">ORDER CONFIRMED</h1>
+        <p style="color: var(--text-muted); font-size: 1.2rem; margin-bottom: 2rem;">
+            Thank you for your purchase. Your order number is <strong style="color: var(--accent-color);">#{{ order.id }}</strong>.
+        </p>
+        <p style="color: var(--text-muted); margin-bottom: 3rem;">
+            We have sent a confirmation email to <strong style="color: var(--text-main);">{{ order.email }}</strong> with your order details.
+        </p>
+        <div style="margin-top: 3rem;">
+            <a href="{% url 'shop:product_list' %}" class="btn" style="padding: 1rem 3rem;">Return to Collections</a>
+        </div>
+    </div>
+{% endblock %}
